@@ -1,0 +1,13 @@
+https://khalilstemmler.com/blogs/typescript/node-starter-project/
+
+
+https://github.com/kalwalt/jsartoolkitNFT
+
+https://www.npmjs.com/package/js-ecs
+https://www.npmjs.com/package/tsify
+
+https://kalwalt.github.io/kalwalt-interactivity-AR/nft/nft_simple_multi_markers.html
+https://kalwalt.github.io/kalwalt-interactivity-AR/
+
+
+https://github.com/babel/babelify/issues/286

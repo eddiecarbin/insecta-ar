@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "outDir": "dist",
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "../node_modules/*",
+                "../node_modules/three/examples/jsm/loaders/*"
+            ],
+            "THREE": [
+                "../node_modules/THREE/src/Three.d.ts"
+            ],
+            "GLTFLoader":[
+                "../node_modules/three/examples/jsm/loaders/GLTFLoader.d.ts"
+            ]
+
+        }
+    },
+    "lib": [
+        "es2016",
+        "dom",
+        "es5"
+    ],
+    "include": [
+        "src/**/*"
+    ]
+}

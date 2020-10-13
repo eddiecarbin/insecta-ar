@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello World!</title>
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>, Chromium
-    <span id="chrome-version"></span>, and Electron
-    <span id="electron-version"></span>.
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./dist/renderer.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <script src="./game/dist/bundle.js"></script>
+  <script>
+    console.log("index ");
+    let context;
+    function init() {
+      console.log("init app");
+      console.log( module);
+      context = new module.InsectaContext();
+      context.initialize()
+      var tick = function () {
+        console.log("tock");
+        requestAnimationFrame(tick);
+      };
+
+      tick();
+
+    }
+
+  </script>
+</head>
+
+<body onload="init()" style="background-color:#D4D4D4;margin:0px;">
+
+  <div id="app">
+    <video loop autoplay muted playsinline id="video">
+    </video>
+    <canvas id="canvas"></canvas>
+  </div>
+</body>
+
 </html>

@@ -1,27 +1,24 @@
 {
-  "name": "electron-quick-start-typescript",
+  "name": "insecta-ar",
   "version": "1.0.0",
   "description": "A minimal Electron application written with Typescript",
   "scripts": {
-    "build": "tsc",
+    "build-js": "browserify game/dist/InsectaContext.js  --s module > game/dist/bundle.js -d",
+    "build": "tsc -p ./game && tsc",
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "start": "npm run build && electron ./dist/main.js"
+    "start": "npm run build && npm run build-js && electron ./dist/main.js"
   },
   "repository": "https://github.com/electron/electron-quick-start-typescript",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo",
-    "typescript"
-  ],
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^9.3.0",
+    "rimraf": "^3.0.2",
     "tslint": "^6.1.2",
     "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "three": "^0.121.1"
   }
 }

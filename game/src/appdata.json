@@ -1,0 +1,12 @@
+{
+    "name" : "Insecta",
+    "insects":[
+        {
+            "id":"pinball",
+            "modelURL":"assets/mantis.glb",
+            "markerData":{
+
+            }
+        }
+    ]
+}

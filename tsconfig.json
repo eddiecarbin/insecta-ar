@@ -6,9 +6,22 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "*": ["node_modules/*"]
+      "*": [
+        "node_modules/*"
+      ],
+      "THREE": [
+        "node_modules/THREE/src/Three.d.ts"
+      ],
+      "GLTFLoader": [
+        "node_modules/three/examples/jsm/loaders/*"
+      ]
     }
   },
+  "lib": [
+    "es2016",
+    "dom",
+    "es5"
+  ],
   "include": [
     "src/**/*"
   ]
