@@ -1,11 +1,24 @@
 {
-    "name" : "Insecta",
-    "insects":[
+    "name": "Insecta",
+    "insects": [
         {
-            "id":"pinball",
-            "modelURL":"assets/mantis.glb",
-            "markerData":{
-
+            "id": "pinball",
+            "modelURL": "assets/mantis.glb",
+            "markerData": {
+                "width": 1637,
+                "height": 2048,
+                "dpi": 600,
+                "url": "../../data/mantis/pinball"
+            }
+        },
+        {
+            "id": "trex",
+            "modelURL": "assets/mantis.glb",
+            "markerData": {
+                "width": 1400,
+                "height": 719,
+                "dpi": 200,
+                "url": "../../data/trex/trex"
             }
         }
     ]

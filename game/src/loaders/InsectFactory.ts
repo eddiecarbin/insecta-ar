@@ -1,4 +1,3 @@
-import { ARWorkerComponet } from "../models/components/ARWorkerComponent";
 import { ModelRendererComponent } from "../models/components/ModelRendererComponent";
 import { Entity } from "../framework/Entity";
 import { InsectEntity } from "../models/InsectEntity";
@@ -13,9 +12,13 @@ import { InsectControllerComponent } from "../models/components/InsectController
 export class InsectFactory {
 
 
-    public createInsectEntity(data: InsectData, video: HTMLVideoElement): Promise<Entity> {
+    static testCreate(): Promise<Entity> {
+        return null;
+    }
 
-        let promise: Promise<Entity> = new Promise<Entity>((resolve, reject) => {
+    static createInsectEntity(data: InsectData, video: HTMLVideoElement, scene: THREE.Scene): Promise<Entity> {
+
+        return new Promise<Entity>((resolve, reject) => {
 
             // const gltfLoader: GLTFLoader = new GLTFLoader();
             // const url = data.modelURL;
@@ -24,14 +27,12 @@ export class InsectFactory {
             //     //scene.add(root);
             // });
             let insectEntity: InsectEntity = new InsectEntity();
-            let arComponent: ARWorkerComponet = insectEntity.addComponent(new ARWorkerComponet()) as ARWorkerComponet;
             insectEntity.addComponent(new ModelRendererComponent(null));
             insectEntity.addComponent(new InsectControllerComponent(data));
 
-            arComponent.initialize(data.markerData, video);
+            insectEntity.initialize();
             resolve(insectEntity);
         });
 
-        return promise;
     }
 }

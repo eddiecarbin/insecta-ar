@@ -1,46 +1,62 @@
-import { AppData } from "./models/AppData";
+import { AppJson } from "./models/AppData";
 import appdata from "./appdata.json";
 import { EventDispatcher, Scene } from "three";
-import { CameraViewRenderer } from "./views/CamereViewRenderer";
+import { WebCameraViewRenderer } from "./views/WebCamereViewRenderer";
 import { Scene3DRenderer } from "./views/Scene3DRenderer";
 import { ARGameManager } from "./models/ARGameManager";
-import { TimeManager } from "./framework/TimeManager";
+import { TimeManager, wait } from "./framework/TimeManager";
+import { ARWorkerGroup } from "./models/ARWorkerGroup";
 
-export class InsectaContext{
 
-    public appData : AppData = appdata as AppData;
+//D:\3lbs\projects\Insecta\playpen\kalwalt-interactivity-AR
 
-    public eventDispatcher : EventDispatcher = new EventDispatcher();
+export class InsectaContext {
 
-    public cameraView : CameraViewRenderer;
+    public appData: AppJson = appdata as AppJson;
 
-    public sceneRenderer : Scene3DRenderer;
+    public eventDispatcher: EventDispatcher = new EventDispatcher();
 
-    public gameManager : ARGameManager;
+    public cameraView: WebCameraViewRenderer;
 
-    public timeManager : TimeManager;
+    public sceneRenderer: Scene3DRenderer;
 
-    public initialize ():void{
-        console.log("started insecta");
+    public gameManager: ARGameManager;
+
+    public timeManager: TimeManager;
+
+    public arWorkerGroup: ARWorkerGroup;
+
+    public async initialize(): Promise<boolean> {
+        console.log("init insecta");
         // models
-        this.gameManager = new ARGameManager();
+        // this.gameManager = new ARGameManager();
 
         // views
-        this.cameraView = new CameraViewRenderer();
-        this.cameraView.initialize();
+        this.cameraView = new WebCameraViewRenderer();
+        await  this.cameraView.initialize();
         this.sceneRenderer = new Scene3DRenderer();
-        this.sceneRenderer.initialize();
+        await this.sceneRenderer.initialize();
 
-        this.timeManager  = new TimeManager();
+        await wait(2000);
         
+        this.arWorkerGroup = new ARWorkerGroup(this);
+        await this.arWorkerGroup.initialize(appdata.insects);
+        
+        this.timeManager = new TimeManager();
+        this.timeManager.addTickedComponent(this.sceneRenderer);
+        this.timeManager.addTickedComponent(this.arWorkerGroup);
+
+        await wait(100);
+        this.startGame();
+
+
+        return Promise.resolve(true);
+    }
+
+    public startGame(): void {
+        console.log("start insecta");
+
         this.timeManager.initialize();
     }
 
-    // var tick = function () {
-    //     draw();
-    //     requestAnimationFrame(tick);
-    // };
-
-    // load();
-    // tick();
 }

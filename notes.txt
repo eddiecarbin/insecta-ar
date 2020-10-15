@@ -2,7 +2,7 @@ https://khalilstemmler.com/blogs/typescript/node-starter-project/
 
 
 https://github.com/kalwalt/jsartoolkitNFT
-
+https://threejs.org/docs/#manual/en/introduction/Installation
 https://www.npmjs.com/package/js-ecs
 https://www.npmjs.com/package/tsify
 
@@ -11,3 +11,13 @@ https://kalwalt.github.io/kalwalt-interactivity-AR/
 
 
 https://github.com/babel/babelify/issues/286
+
+https://kalwalt.github.io/kalwalt-interactivity-AR/
+
+https://github.com/kalwalt/mind-ar-js
+
+
+https://kalwalt.github.io/jsartoolkit5/examples/nft_improved_worker/
+
+
+https://kalwalt.github.io/artoolkit-docs/2_Configuration/config_camera_calibration.html

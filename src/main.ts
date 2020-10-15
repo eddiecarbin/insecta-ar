@@ -3,17 +3,21 @@ import * as path from "path";
 
 function createWindow() {
   // Create the browser window.
+
+  ///1920×1080
   const mainWindow = new BrowserWindow({
-    height: 600,
+    //  fullscreen: true,
+    height: 1080,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
-    width: 800,
+    width: 1920,
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "../index.html"));
 
+  mainWindow.setMenu(null);
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 }

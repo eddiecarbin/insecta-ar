@@ -13,12 +13,15 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "@babel/core": "^7.12.0",
+    "babelify": "^10.0.0",
     "electron": "^9.3.0",
     "rimraf": "^3.0.2",
     "tslint": "^6.1.2",
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "path": "^0.12.7",
     "three": "^0.121.1"
   }
 }
