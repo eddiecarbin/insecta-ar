@@ -1,15 +1,15 @@
 import { Entity } from "../framework/entity/Entity";
 import { ModelRendererComponent } from "./components/ModelRendererComponent";
-import * as  BABYLON from "babylonjs";
+import * as THREE from "THREE"
 
 export class InsectEntity extends Entity {
 
-    public getModelRoot(): BABYLON.TransformNode {
+    public getModelRoot(): THREE.Object3D {
         let _modelComponent: ModelRendererComponent = this.getComponent(ModelRendererComponent) as ModelRendererComponent;
         return _modelComponent.root;
     }
 
-    public getModel(): BABYLON.AbstractMesh {
+    public getModel(): THREE.Object3D {
         let _modelComponent: ModelRendererComponent = this.getComponent(ModelRendererComponent) as ModelRendererComponent;
         return _modelComponent.model;
     }

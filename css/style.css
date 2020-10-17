@@ -13,7 +13,7 @@ html {
     left: 0;
     top: 0;
     z-index: 100;
-  
+    /* background: clear ; */
     display: block;
     width: 100% !important;
     height: 100% !important;
@@ -29,6 +29,18 @@ html {
     height: 100%;
   }
   
+  
+  #inspector {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 400;
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+  
   #video {
     position: absolute;
     top: 0;
@@ -40,7 +52,7 @@ html {
     object-fit: cover;
   }
   
-#canvas {
+/* #canvas {
   position: absolute;
     left: 0;
     top: 0;
@@ -50,7 +62,7 @@ html {
     width: 100% !important;
   height: 100% !important;
   object-fit: cover;
-}
+} */
 
 #arvideo {
   display: none;

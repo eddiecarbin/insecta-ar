@@ -25,7 +25,7 @@ export class ARWorkerController extends Model implements ITicked {
 
     // private firstPositioning :boolean = false;
     
-    private interpolationFactor: number = 24;
+    private interpolationFactor: number = 1;
     private world: any;
 
     private camera: THREE.Camera;

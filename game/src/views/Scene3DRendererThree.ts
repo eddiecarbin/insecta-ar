@@ -36,9 +36,13 @@ export class Scene3DRendererThree implements ITicked {
 
 
             var light = new THREE.AmbientLight(0xffffff);
-            this.scene.add(light);
+            // this.scene.add(light);
 
-
+            var hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+            
+            
+            hemiLight.position.set( 0, 20, 0 );
+            this.scene.add( hemiLight );
             // this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             // this.camera = new THREE.PerspectiveCamera( 75, GameParam.screenWidth / GameParam.screenHeight, 0.1, 1000 );
             this.scene.add(this.camera);

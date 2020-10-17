@@ -23,9 +23,9 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@babylonjs/core": "^4.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
-    "babylonjs": "^4.1.0",
     "path": "^0.12.7",
     "rollup": "^2.30.0",
     "rollup-plugin-terser": "^7.0.2",

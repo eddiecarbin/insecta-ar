@@ -4,24 +4,29 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="stylesheet" type="text/css" href="./css/style.css">
-
+  <!-- async=false defer=false -->
+  <!-- <script src="./node_modules/babylonjs/babylon.js"></script> -->
   <script src="./game/dist/bundle.js"></script>
   <script>
     let context;
     function init() {
       console.log("init app");
       context = new insecta.InsectaContext();
-      context.initialize()
+      context.initialize();
     }
 
   </script>
 </head>
 
 <body onload="init()" style="background-color:#D4D4D4;margin:0px;">
-  <div id="app">
-    <video loop autoplay muted playsinline id="video">
-    </video>
-    <canvas id="canvas"></canvas>
+
+  <div id="inspector">
+
+    <div id="app">
+      <video loop autoplay muted playsinline id="video">
+      </video>
+      <canvas id="canvas"></canvas>
+    </div>
   </div>
 </body>
 
