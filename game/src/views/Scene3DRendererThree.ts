@@ -1,7 +1,7 @@
 import { ITicked } from "../framework/TimeManager";
 import * as THREE from "THREE"
 import { GameParam } from "../models/AppData";
-export class Scene3DRenderer implements ITicked {
+export class Scene3DRendererThree implements ITicked {
 
     public renderer: THREE.WebGLRenderer;
 
@@ -11,27 +11,37 @@ export class Scene3DRenderer implements ITicked {
 
     public camera: THREE.Camera;
 
-    public canvas_draw : HTMLCanvasElement;
+    public canvas_draw: HTMLCanvasElement;
 
     private sphere: THREE.Mesh;
 
-    private cube : THREE.Mesh;
+    private cube: THREE.Mesh;
 
     public initialize(): Promise<boolean> {
 
         return new Promise<boolean>(async (resolve, reject) => {
 
             this.canvas_draw = document.getElementById("canvas") as HTMLCanvasElement;
-            this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas_draw, alpha: true, antialias: true });
+            this.renderer = new THREE.WebGLRenderer({
+                canvas: this.canvas_draw,
+                // precision: 'mediump',
+                alpha: true,
+                antialias: true
+            });
             this.renderer.setPixelRatio(window.devicePixelRatio);
             this.scene = new THREE.Scene();
 
             this.camera = new THREE.Camera();
             this.camera.matrixAutoUpdate = false;
-            
+
+
+            var light = new THREE.AmbientLight(0xffffff);
+            this.scene.add(light);
+
+
             // this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             // this.camera = new THREE.PerspectiveCamera( 75, GameParam.screenWidth / GameParam.screenHeight, 0.1, 1000 );
-            // this.scene.add(this.camera);
+            this.scene.add(this.camera);
 
             this.sphere = new THREE.Mesh(
                 new THREE.SphereGeometry(1.5, 8, 8),
@@ -41,13 +51,13 @@ export class Scene3DRenderer implements ITicked {
             // this.scene.add(this.root);
 
             // this.sphere.material.flatShading;
-            this.sphere.position.z = 0;
-            this.sphere.position.x = 0;
-            this.sphere.position.y = 0;
-            this.sphere.scale.set(200, 200, 200);
+            // this.sphere.position.z = 0;
+            // this.sphere.position.x = 0;
+            // this.sphere.position.y = 0;
+            // this.sphere.scale.set(200, 200, 200);
 
             this.renderer.setSize(GameParam.screenWidth, GameParam.screenHeight);
-            
+
             // var geometry = new THREE.BoxGeometry();
             // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
             // this.cube = new THREE.Mesh(geometry, material);

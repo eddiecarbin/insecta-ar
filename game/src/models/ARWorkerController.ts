@@ -1,8 +1,7 @@
-import { InsectFactory } from "../loaders/InsectFactory";
-import { EntityComponent } from "../framework/EntityComponent";
+import { InsectFactoryThree } from "../loaders/InsectFactoryThree";
 import { ITicked } from "../framework/TimeManager";
 import { InsectData, MarkerData } from "./AppData";
-import { Entity } from "../framework/Entity";
+import { Entity } from "../framework/entity/Entity";
 import { Model } from "../framework/Model";
 import * as THREE from "THREE"
 import { InsectEntity } from "./InsectEntity";
@@ -24,6 +23,8 @@ export class ARWorkerController extends Model implements ITicked {
     private ox: number;
     private oy: number;
 
+    // private firstPositioning :boolean = false;
+    
     private interpolationFactor: number = 24;
     private world: any;
 
@@ -53,6 +54,8 @@ export class ARWorkerController extends Model implements ITicked {
     }
     public _entities: Entity[] = [];
 
+    private model : THREE.Object3D;
+
     constructor(camera: THREE.Camera) {
         super();
         this.camera = camera;
@@ -71,18 +74,17 @@ export class ARWorkerController extends Model implements ITicked {
         return new Promise<boolean>(async (resolve, reject) => {
 
             // let factory: InsectFactory = new InsectFactory();
-            await InsectFactory.createInsectEntity(data, video, scene).then((enity) => {
+            await InsectFactoryThree.createInsectEntity(data, video, scene).then((enity) => {
                 this._entities.push(enity);
 
                 let _modelRoot: THREE.Object3D = (enity as InsectEntity).getModelRoot();
                 this.root.add(_modelRoot);
+
+                // this.model = (enity as InsectEntity).getModel();
                 // console.log('../' + this.markerData.url);
                 // renderer.setSize(sw, sh);
-                this.worker = new Worker('./game/resources/jsartoolkit5/artoolkit/artoolkit.wasm_worker.js');
-
                 // this.worker = new Worker('./js/artoolkitNFT.worker.js');
-                // this.worker.postMessage({ type: "load", pw: this.pw, ph: this.ph, camera_para: camera_para, marker: '../' + marker.url });
-
+                this.worker = new Worker('./game/resources/jsartoolkit5/artoolkit/artoolkit.wasm_worker.js');
                 this.worker.onmessage = (ev) => {
                     this.load();
                     // this.process();
@@ -96,7 +98,7 @@ export class ARWorkerController extends Model implements ITicked {
     public load() {
 
         var camera_para = '../../data/camera_para.dat';
-        // let u = url.resolve("../../", "data/camera_para.dat");
+        // var camera_para = '../../data/camera_para-iPhone 5 rear 640x480 1.0m.dat';
         this.canvas_process = document.createElement('canvas');
         this.context_process = this.canvas_process.getContext('2d');
 
@@ -110,8 +112,8 @@ export class ARWorkerController extends Model implements ITicked {
 
         this.w = this.vw * pscale;
         this.h = this.vh * pscale;
-        this.pw = Math.max(this.w, this.h / 3 * 4);
-        this.ph = Math.max(this.h, this.w / 4 * 3);
+        this.pw = Math.max(this.w, (this.h / 3) * 4);
+        this.ph = Math.max(this.h, (this.w / 4) * 3);
         this.ox = (this.pw - this.w) / 2;
         this.oy = (this.ph - this.h) / 2;
 
@@ -145,8 +147,12 @@ export class ARWorkerController extends Model implements ITicked {
                     proj[5] *= ratioH;
                     proj[9] *= ratioH;
                     proj[13] *= ratioH;
+                    // console.log("do we ever set the camera!!!!")
+                    // console.log(this.camera.projectionMatrix);
+                    this.camera.matrixAutoUpdate = false;
                     this.setMatrix(this.camera.projectionMatrix, proj);
-                    this.camera.updateMatrix();
+                    // this.camera.updateMatrix();
+                    console.log(this.camera.projectionMatrix);
 
                     break;
                 }
@@ -189,9 +195,11 @@ export class ARWorkerController extends Model implements ITicked {
                 this.trackedMatrix.delta[i] = this.world[i] - this.trackedMatrix.interpolated[i];
                 this.trackedMatrix.interpolated[i] = this.trackedMatrix.interpolated[i] + (this.trackedMatrix.delta[i] / this.interpolationFactor);
             }
-            console.log(this.root.matrix);
+            // console.log(this.root.matrix);
+            this.root.matrixAutoUpdate = false;
+
             this.setMatrix(this.root.matrix, this.trackedMatrix.interpolated)
-            this.root.updateMatrix();
+            // console.log(this.root.matrix);
         }
 
         this._entities.forEach(element => {
@@ -204,6 +212,17 @@ export class ARWorkerController extends Model implements ITicked {
             this.world = null;
         } else {
             this.world = JSON.parse(msg.matrixGL_RH);
+            // if (!this.firstPositioning) {
+                // this.firstPositioning = true;
+                // this.model.position.y = (msg.height / msg.dpi * 2.54 * 10)/2.0;
+                // this.model.position.x = (msg.width / msg.dpi * 2.54 * 10)/2.0;
+            // }
+            // console.log(msg);
+            // console.log("NFT width: ", msg.width);
+            // console.log("NFT height: ", msg.height);
+            // console.log("NFT dpi: ", msg.dpi);
+            // var o_view = scene.getObjectByName('Duck');
+            // console.log(o_view);
         }
     }
 
@@ -212,13 +231,10 @@ export class ARWorkerController extends Model implements ITicked {
         for (var key in value) {
             array[key] = value[key];
         }
-        matrix.set(array);
-
-        return;
+        // matrix.set(array);
         if (typeof matrix.elements.set === 'function') {
             matrix.elements.set(array);
         } else {
-            console.log("here array " + [].slice.call(array))
             matrix.elements = [].slice.call(array);
         }
 

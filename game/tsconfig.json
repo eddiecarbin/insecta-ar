@@ -1,13 +1,16 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
+        "module": "ES2015",
+        "target": "ES6",
         "resolveJsonModule": true,
+        "moduleResolution": "Node",
+        "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "noImplicitAny": true,
         "sourceMap": true,
         "outDir": "dist",
-        "downlevelIteration":true,
+        "removeComments": true,
+        "downlevelIteration": true,
         "baseUrl": ".",
         "paths": {
             "*": [
@@ -17,7 +20,7 @@
             "app/*": [
                 "src/*"
             ],
-            "THREE": [
+            "three": [
                 "../node_modules/THREE/src/Three.d.ts"
             ],
             "GLTFLoader": [

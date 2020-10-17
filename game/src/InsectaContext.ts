@@ -1,8 +1,7 @@
 import { AppJson } from "./models/AppData";
 import appdata from "./appdata.json";
-import { EventDispatcher, Scene } from "three";
 import { WebCameraViewRenderer } from "./views/WebCamereViewRenderer";
-import { Scene3DRenderer } from "./views/Scene3DRenderer";
+import { Scene3DRendererThree } from "./views/Scene3DRendererThree";
 import { ARGameManager } from "./models/ARGameManager";
 import { TimeManager, wait } from "./framework/TimeManager";
 import { ARWorkerGroup } from "./models/ARWorkerGroup";
@@ -14,11 +13,11 @@ export class InsectaContext {
 
     public appData: AppJson = appdata as AppJson;
 
-    public eventDispatcher: EventDispatcher = new EventDispatcher();
+    public eventDispatcher: EventTarget = new EventTarget();
 
     public cameraView: WebCameraViewRenderer;
 
-    public sceneRenderer: Scene3DRenderer;
+    public sceneRenderer: Scene3DRendererThree;
 
     public gameManager: ARGameManager;
 
@@ -34,7 +33,7 @@ export class InsectaContext {
         // views
         this.cameraView = new WebCameraViewRenderer();
         await  this.cameraView.initialize();
-        this.sceneRenderer = new Scene3DRenderer();
+        this.sceneRenderer = new Scene3DRendererThree();
         await this.sceneRenderer.initialize();
 
         await wait(2000);

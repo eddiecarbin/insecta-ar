@@ -1,4 +1,3 @@
-import { resolve } from "path";
 import { ITicked } from "../framework/TimeManager";
 import { InsectaContext } from "../InsectaContext";
 import { AppJson, InsectData } from "./AppData";

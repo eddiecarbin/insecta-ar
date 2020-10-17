@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "CommonJS",
     "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "moduleResolution":"Node",
+    "allowSyntheticDefaultImports":true,
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
-    "target": "es5",
+    "target": "ES5",
     "paths": {
       "*": [
         "node_modules/*"

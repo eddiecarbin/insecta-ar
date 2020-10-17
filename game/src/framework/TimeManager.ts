@@ -1,5 +1,6 @@
+import { Model } from "./Model";
 
-export class TimeManager {
+export class TimeManager extends Model{
     // var tick = function () {
     //     draw();
     //     requestAnimationFrame(tick);

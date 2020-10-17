@@ -1,24 +1,31 @@
 {
     "name": "Insecta",
+    "assetURL": "game/assets/",
     "insects": [
         {
             "id": "pinball",
-            "modelURL": "assets/mantis.glb",
+            "modelURL": "game/assets/Duck.gltf",
+            "file": "Duck.gltf",
             "markerData": {
                 "width": 1637,
                 "height": 2048,
                 "dpi": 600,
-                "url": "../../data/mantis/pinball"
+                "url": "../../data/mantis/pinball",
+                "offsetX": 0,
+                "offsetY": 0
             }
         },
         {
             "id": "trex",
-            "modelURL": "assets/mantis.glb",
+            "modelURL": "game/assets/Duck.glb",
+            "file": "Duck.glb",
             "markerData": {
                 "width": 1400,
                 "height": 719,
                 "dpi": 200,
-                "url": "../../data/trex/trex"
+                "url": "../../data/trex/trex",
+                "offsetX": 0,
+                "offsetY": 0
             }
         }
     ]

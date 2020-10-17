@@ -1,4 +1,4 @@
-import { EntityComponent } from "../../framework/EntityComponent";
+import { EntityComponent } from "app/framework/entity/EntityComponent";
 import { InsectData } from "../AppData";
 
 export class InsectControllerComponent extends EntityComponent{

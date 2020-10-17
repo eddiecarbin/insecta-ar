@@ -1,9 +1,8 @@
-import { EventDispatcher, KeyframeTrack } from "three";
 import { EntityComponent } from "./EntityComponent";
-import { ITicked } from "./TimeManager";
+import { ITicked } from "../TimeManager";
 
 export class Entity implements ITicked {
-    public dispatcher: EventDispatcher = new EventDispatcher();
+    public dispatcher: EventTarget = new EventTarget();
 
     private _components: Map<EntityComponent, string> = new Map<EntityComponent, string>();
 
@@ -36,20 +35,15 @@ export class Entity implements ITicked {
 
     public initialize(): void {
         this._components.forEach((value: string, key: EntityComponent) => {
-            console.log(key, value);
             key.onAdd();
         });
-
-
         this._enabled = true;
     }
 
     public update(): void {
-
         if (!this._enabled)
             return;
 
-        //const check = (p: any): p is ITicked => p.hasOwnProperty('update');
         this._components.forEach((value: string, key: EntityComponent) => {
             key.update(0.16);
         });
